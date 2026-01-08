@@ -1,0 +1,42 @@
+name: CodSpeed
+'on':
+  push:
+    branches:
+    - main
+  pull_request: null
+  workflow_dispatch: null
+permissions:
+  contents: read
+  id-token: write
+env:
+  RUSTFLAGS: --cfg uuid_unstable
+jobs:
+  codspeed:
+    name: Run benchmarks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+    - name: Install patchelf
+      run: sudo apt-get update && sudo apt-get install -y patchelf
+    - name: Build Python package
+      run: 'pip install maturin
+
+        maturin build --release
+
+        pip install target/wheels/*.whl
+
+        '
+    - name: Install test dependencies
+      run: pip install pytest-codspeed==4.2.0
+    - name: Run benchmarks
+      uses: CodSpeedHQ/action@v4
+      with:
+        upload-url: ${{ secrets.CODSPEED_FRANCOIS_DEV_UPLOAD_URL }}
+        mode: simulation
+        run: pytest tests/test_benchmarks.py --codspeed
