@@ -35,6 +35,6 @@ jobs:
     - name: Run benchmarks
       uses: CodSpeedHQ/action@v4
       with:
-        upload-url: ${{ secrets.CODSPEED_FRANCOIS_DEV_UPLOAD_URL }}
+        upload-url: ${{ secrets.CODSPEED_STAGING_UPLOAD_URL }}
         mode: simulation
         run: pytest tests/test_benchmarks.py --codspeed
