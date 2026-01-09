@@ -4,6 +4,7 @@
 
 [![Package version](https://badge.fury.io/py/uuid-utils.svg)](https://pypi.org/project/uuid-utils/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/uuid-utils.svg?color=%2334D058)](https://pypi.org/project/uuid-utils)
+[![CodSpeed](https://img.shields.io/badge/CodSpeed-Performance%20Monitored-blue?logo=github&logoColor=white)](https://codspeed.io/AvalancheHQ/uuid-utils-3?utm_source=badge)
 
 </div>
 
